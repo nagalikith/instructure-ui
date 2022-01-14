@@ -48,4 +48,5 @@ const generateComponentTheme = (theme: Theme): OptionsTheme => {
   }
 }
 
+export { generateComponentTheme as optionsThemeGenerator }
 export default generateComponentTheme

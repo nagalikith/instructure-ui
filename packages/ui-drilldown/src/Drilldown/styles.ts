@@ -23,7 +23,11 @@
  */
 
 import type { DrilldownTheme } from '@instructure/shared-types'
-import type { DrilldownProps, DrilldownStyle } from './props'
+import type {
+  DrilldownProps,
+  DrilldownStyleProps,
+  DrilldownStyle
+} from './props'
 
 /**
  * ---
@@ -37,14 +41,65 @@ import type { DrilldownProps, DrilldownStyle } from './props'
  */
 const generateStyle = (
   componentTheme: DrilldownTheme,
-  _props: DrilldownProps
+  _props: DrilldownProps,
+  state: DrilldownStyleProps
 ): DrilldownStyle => {
+  const { hasHighlightedOption } = state
+
+  const beforeOrAfterElement = {
+    display: 'flex',
+    flexShrink: 0,
+    height: '100%',
+    alignItems: 'center'
+  }
+
   return {
     drilldown: {
       label: 'drilldown',
       backgroundColor: componentTheme.background,
+      color: componentTheme.color,
+
+      ...(hasHighlightedOption && {
+        '&:focus::before': {
+          display: 'none'
+        }
+      })
+    },
+    container: {
+      label: 'drilldown__container',
+      backgroundColor: componentTheme.background,
       color: componentTheme.color
-    }
+    },
+    headerBack: {
+      label: 'drilldown__headerBack'
+    },
+    headerTitle: {
+      label: 'drilldown__headerTitle',
+      fontWeight: componentTheme.headerTitleFontWeight
+    },
+    optionContainer: {
+      label: 'drilldown__optionContainer',
+      alignItems: 'center',
+      display: 'flex',
+      height: '100%'
+    },
+    optionBeforeElement: {
+      label: 'drilldown__optionBeforeElement',
+      ...beforeOrAfterElement,
+      paddingInlineEnd: componentTheme.iconPadding
+    },
+    optionAfterElement: {
+      label: 'drilldown__optionAfterElement',
+      ...beforeOrAfterElement,
+      paddingInlineStart: componentTheme.iconPadding
+    },
+    optionContent: {
+      label: 'drilldown__optionContent',
+      flexGrow: 1
+    },
+
+    // we use it in the index file
+    headerActionColor: componentTheme.headerActionColor
   }
 }
 

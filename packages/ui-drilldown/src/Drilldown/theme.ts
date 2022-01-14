@@ -31,11 +31,17 @@ import { DrilldownTheme } from '@instructure/shared-types'
  * @return {Object} The final theme object with the overrides and component variables
  */
 const generateComponentTheme = (theme: Theme): DrilldownTheme => {
-  const { colors } = theme
+  const { colors, typography, spacing } = theme
 
   const componentVariables: DrilldownTheme = {
     background: colors?.backgroundLightest,
-    color: colors?.textDarkest
+    color: colors?.textDarkest,
+
+    headerTitleFontWeight: typography.fontWeightBold,
+
+    headerActionColor: colors.textLink,
+
+    iconPadding: spacing?.small
   }
 
   return {

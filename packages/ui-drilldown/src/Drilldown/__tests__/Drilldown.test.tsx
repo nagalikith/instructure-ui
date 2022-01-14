@@ -31,7 +31,13 @@ import { DrilldownLocator } from '../DrilldownLocator'
 describe('<Drilldown />', async () => {
   describe('for a11y', async () => {
     it('should be accessible', async () => {
-      await mount(<Drilldown />)
+      await mount(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="item1">Item1</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
 
       const drilldown = await DrilldownLocator.find()
 

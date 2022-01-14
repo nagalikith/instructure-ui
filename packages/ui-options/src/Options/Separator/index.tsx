@@ -25,7 +25,7 @@
 /** @jsx jsx */
 import { Component } from 'react'
 
-import { getElementType } from '@instructure/ui-react-utils'
+import { getElementType, passthroughProps } from '@instructure/ui-react-utils'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
@@ -62,12 +62,16 @@ class Separator extends Component<OptionsSeparatorProps> {
   }
 
   render() {
-    const { as, styles, makeStyles, ...rest } = this.props
+    const { as, styles, ...rest } = this.props
     const ElementType = getElementType(Separator, this.props, () => as!)
 
     return (
       <ElementType role="none">
-        <div {...rest} css={styles?.separator} role="presentation" />
+        <div
+          {...passthroughProps(rest)}
+          css={styles?.separator}
+          role="presentation"
+        />
       </ElementType>
     )
   }
