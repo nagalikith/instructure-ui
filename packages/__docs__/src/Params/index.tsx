@@ -23,17 +23,14 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { Table } from '@instructure/ui-table'
 
 import { compileMarkdown } from '../compileMarkdown'
-
-class Params extends Component {
-  static propTypes = {
-    params: PropTypes.array.isRequired,
-    layout: PropTypes.string
-  }
+import type { ParamsProps } from './props'
+import { propTypes } from './props'
+class Params extends Component<ParamsProps> {
+  static propTypes = propTypes
 
   static defaultProps = {
     layout: 'small'
@@ -58,11 +55,11 @@ class Params extends Component {
     })
   }
 
-  renderType(type) {
-    return type ? type.names.join(', ') : null
+  renderType(type: { name: string }) {
+    return type ? type.name : null
   }
 
-  renderDescription(description) {
+  renderDescription(description: string) {
     return <div>{description && compileMarkdown(description)}</div>
   }
 

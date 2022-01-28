@@ -44,6 +44,7 @@ import { ComponentTheme } from '../ComponentTheme'
 import { Heading } from '../Heading'
 import { propTypes, allowedProps } from './props'
 import type { DocumentProps, DocType, SingleChildrenType } from './props'
+import type { ViewOwnProps } from '@instructure/ui-view'
 @withStyle(generateStyle, generateComponentTheme)
 class Document extends Component<
   DocumentProps,
@@ -71,7 +72,10 @@ class Document extends Component<
     this.props.makeStyles?.()
   }
 
-  handleDetailsTabChange = (_event: Event, { index }: any) => {
+  handleDetailsTabChange = (
+    _event: React.MouseEvent<ViewOwnProps> | React.KeyboardEvent<ViewOwnProps>,
+    { index }: any
+  ) => {
     this.setState({
       selectedDetailsTabIndex: index
     })
