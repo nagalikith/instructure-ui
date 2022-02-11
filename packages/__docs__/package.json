@@ -106,6 +106,7 @@
     "@instructure/ui-utils": "8.17.0",
     "@instructure/ui-view": "8.17.0",
     "babel-loader": "^8.2.3",
+    "buffer": "^6",
     "lorem-ipsum": "^1.0.6",
     "marked": "^2.0.3",
     "moment": "^2.23.0",
@@ -114,8 +115,7 @@
     "react-dom": "^17.0.0",
     "react-github-corner": "^2.1.0",
     "semver": "^7.3.5",
-    "webpack-merge": "^5",
-    "buffer": "^6"
+    "webpack-merge": "^5"
   },
   "devDependencies": {
     "@instructure/config-loader": "8.17.0",
@@ -129,9 +129,9 @@
     "html-webpack-plugin": "^5",
     "jsdoc-api": "^6.0.0",
     "mkdirp": "^1",
+    "raw-loader": "^4",
     "react-docgen": "^6.0.0-alpha.0",
     "svg-inline-loader": "^0.8.0",
-    "webpack-bundle-analyzer": "^4",
-    "raw-loader": "^4"
+    "webpack-bundle-analyzer": "^4"
   }
 }

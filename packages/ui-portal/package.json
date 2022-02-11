@@ -28,12 +28,12 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",
+    "@instructure/console": "8.17.0",
     "@instructure/shared-types": "8.17.0",
+    "@instructure/ui-dom-utils": "8.17.0",
     "@instructure/ui-i18n": "8.17.0",
     "@instructure/ui-prop-types": "8.17.0",
     "@instructure/ui-react-utils": "8.17.0",
-    "@instructure/ui-dom-utils": "8.17.0",
-    "@instructure/console": "8.17.0",
     "prop-types": "^15"
   },
   "peerDependencies": {

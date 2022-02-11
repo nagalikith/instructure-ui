@@ -36,8 +36,8 @@
     "@instructure/ui-dom-utils": "8.17.0",
     "@instructure/ui-prop-types": "8.17.0",
     "@instructure/ui-react-utils": "8.17.0",
-    "@instructure/ui-view": "8.17.0",
     "@instructure/ui-utils": "8.17.0",
+    "@instructure/ui-view": "8.17.0",
     "prop-types": "^15"
   },
   "peerDependencies": {
