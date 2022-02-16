@@ -105,6 +105,8 @@
     "@instructure/ui-truncate-text": "8.17.0",
     "@instructure/ui-utils": "8.17.0",
     "@instructure/ui-view": "8.17.0",
+    "@microsoft/api-extractor": "^7.19.4",
+    "@microsoft/api-extractor-model": "^7.15.3",
     "babel-loader": "^8.2.3",
     "lorem-ipsum": "^1.0.6",
     "marked": "^2.0.3",

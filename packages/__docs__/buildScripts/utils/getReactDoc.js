@@ -21,13 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
+const apiExtractor = require('@microsoft/api-extractor')
+const myApiModel = require('@microsoft/api-extractor-model')
 const reactDocgen = require('react-docgen')
+
 const path = require('path')
 
 const ERROR_MISSING_DEFINITION = 'No suitable component definition found.'
 
 module.exports = function getReactDoc(source, fileName, error) {
+  // invoke api extractor
+  const apiExtractorJsonPath = path.join(
+    fileName,
+    '../../../api-extractor.json'
+  )
+  const extractorConfig =
+    apiExtractor.ExtractorConfig.loadFileAndPrepare(apiExtractorJsonPath)
+  const extractorResult = apiExtractor.Extractor.invoke(extractorConfig, {
+    localBuild: true,
+    showVerboseMessages: true
+  })
+  if (extractorResult.succeeded) {
+    // console.log(`API Extractor completed successfully`)
+    process.exitCode = 0
+  } else {
+    console.error(
+      `API Extractor completed with ${extractorResult.errorCount} errors` +
+        ` and ${extractorResult.warningCount} warnings`
+    )
+    process.exitCode = 1
+  }
+  // process api.json file
+  const apiModel = new myApiModel.ApiModel()
+  const packagePath = path.join(fileName, '../../../')
+  const packageName = path.basename(packagePath)
+  // console.log(packageName)
+  const apiPackage = apiModel.loadPackage(
+    '/Users/nam.nguyen/Work/instui/instructure-ui/packages/ui-avatar/temp/ui-avatar.api.json'
+  )
+  // console.log(apiPackage.members);
+  apiPackage.members.forEach((element) => {
+    // console.log(element);
+    // console.log(JSON.stringify(element))
+  })
   let doc = {}
   try {
     doc = reactDocgen.parse(
