@@ -26,6 +26,7 @@ const myApiModel = require('@microsoft/api-extractor-model')
 const reactDocgen = require('react-docgen')
 
 const path = require('path')
+const { ApiClass } = require('@microsoft/api-extractor-model')
 
 const ERROR_MISSING_DEFINITION = 'No suitable component definition found.'
 
@@ -55,16 +56,28 @@ module.exports = function getReactDoc(source, fileName, error) {
   const apiModel = new myApiModel.ApiModel()
   const packagePath = path.join(fileName, '../../../')
   const packageName = path.basename(packagePath)
-  // console.log(packageName)
   const apiPackage = apiModel.loadPackage(
-    '/Users/nam.nguyen/Work/instui/instructure-ui/packages/ui-avatar/temp/ui-avatar.api.json'
+    '../../packages/ui-avatar/temp/ui-avatar.api.json'
   )
-  // console.log(apiPackage.members);
+  let doc = {}
   apiPackage.members.forEach((element) => {
-    // console.log(element);
+    let members = element.members
+    for (const member of members) {
+      if (member.kind === 'Class') {
+        for (const classMember of member.members) {
+          const asd = classMember.buildCanonicalReference()
+          const obj = {}
+          classMember.serializeInto(obj)
+          // eslint-disable-next-line no-console
+          console.log(obj)
+          // TODO put stuff into obj, like obj[classMember.displayName] = ??
+        }
+      }
+    }
     // console.log(JSON.stringify(element))
   })
-  let doc = {}
+
+  /*
   try {
     doc = reactDocgen.parse(
       source,
@@ -95,5 +108,6 @@ module.exports = function getReactDoc(source, fileName, error) {
       error(err)
     }
   }
+   */
   return doc
 }
