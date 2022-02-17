@@ -95,7 +95,8 @@
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.17.0",
-    "@instructure/ui-test-utils": "8.17.0"
+    "@instructure/ui-test-utils": "8.17.0",
+    "jest": "^24.9.0"
   },
   "publishConfig": {
     "access": "public"
