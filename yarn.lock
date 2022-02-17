@@ -4376,7 +4376,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-token-scripts@workspace:packages/ui-token-scripts":
+"@instructure/ui-token-scripts@workspace:*, @instructure/ui-token-scripts@workspace:packages/ui-token-scripts":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-token-scripts@workspace:packages/ui-token-scripts"
   dependencies:
@@ -20137,6 +20137,7 @@ __metadata:
   dependencies:
     "@babel/cli": ^7.17.3
     "@instructure/ui-scripts": "workspace:*"
+    "@instructure/ui-token-scripts": "workspace:*"
     "@types/react-dom": ^17.0.11
     chalk: ^4
     danger: ^11
