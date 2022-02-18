@@ -52,7 +52,7 @@ exports.builder = (yargs) => {
     type: 'array',
     describe:
       'One or multiple glob path patterns for files/directories that will be ignored when the codemods are applied (ex. **/node_modules/**).',
-    default: ['**/node_modules/**']
+    default: [require.resolve('**/node_modules/**')]
   })
 
   yargs.option('version', {

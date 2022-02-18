@@ -36,6 +36,10 @@
     "yargs": "^16",
     "yargs-interactive": "^3.0.0"
   },
+  "peerDependencies": {
+    "@babel/core": "",
+    "eslint": ""
+  },
   "publishConfig": {
     "access": "public"
   }

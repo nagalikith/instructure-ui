@@ -21,16 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const path = require('path')
 const ENV = process.env.NODE_ENV || 'production'
 const DEBUG = process.env.DEBUG || ENV === 'development'
-const noLint = process.argv.includes('--no-lint')
-const DISABLE_LINTER_FAILURE_ON_WARNING =
-  process.env.DISABLE_LINTER_FAILURE_ON_WARNING === '1' || false
 const exclude = [/node_modules/, /\/lib\//, /\/es\//]
 
 const babelLoader = {
-  loader: 'babel-loader',
+  loader: require.resolve('babel-loader'),
   options: {
     cacheDirectory: !DEBUG ? false : '.babel-cache'
   }
@@ -40,9 +36,11 @@ const rules = [
   {
     test: /\.(js|mjs|jsx|ts|tsx)$/,
     exclude: [...exclude],
+    // yarn doctor will report this as an issue, but doctor is buggy:
+    // https://github.com/yarnpkg/berry/issues/3061
     use: [
       {
-        loader: 'thread-loader',
+        loader: require.resolve('thread-loader'),
         options: {
           workers: 2,
           workerParallelJobs: 50,
@@ -58,41 +56,23 @@ const rules = [
   {
     test: /\.css$/,
     include: [/ui-icons/],
-    use: ['style-loader', 'css-loader']
+    use: [require.resolve('style-loader'), require.resolve('css-loader')]
   },
   {
     // eslint-disable-next-line no-useless-escape
     test: /\.(eot|woff2?|otf|svg|ttf)([\?]?.*)$/,
-    loader: 'url-loader', // TODO use https://webpack.js.org/guides/asset-modules
+    loader: require.resolve('url-loader'), // TODO use https://webpack.js.org/guides/asset-modules
     options: {
       limit: 8192
     }
   },
   {
     test: /\.(png|jpg|jpeg|gif)$/,
-    loader: 'url-loader', // TODO use https://webpack.js.org/guides/asset-modules
+    loader: require.resolve('url-loader'), // TODO use https://webpack.js.org/guides/asset-modules
     options: {
       limit: 8192
     }
   }
 ]
-
-if (!noLint) {
-  // TODO make this diabled by default or rather do not lint here
-  rules.unshift({
-    enforce: 'pre',
-    test: /\.m?js?$/,
-    exclude,
-    loader: 'eslint-loader',
-    options: {
-      failOnWarning: Boolean(!DEBUG && !DISABLE_LINTER_FAILURE_ON_WARNING),
-      emitError: Boolean(!DEBUG),
-      emitWarning: Boolean(DEBUG),
-      failOnError: Boolean(!DEBUG),
-      quiet: true,
-      ignorePath: path.join(process.cwd(), '.eslintignore')
-    }
-  })
-}
 
 module.exports = rules
